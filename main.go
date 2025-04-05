@@ -46,7 +46,7 @@ func WithAuth(authKey, authToken, userAgent string) connect.ClientOption {
 						if err != nil {
 							return nil, connect.NewError(
 								connect.CodeInternal,
-								fmt.Errorf("Failed to parse cookie: %w", err),
+								fmt.Errorf("failed to parse cookie: %w", err),
 							)
 						}
 						authToken := ""

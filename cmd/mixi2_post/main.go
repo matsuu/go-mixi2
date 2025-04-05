@@ -19,7 +19,7 @@ func createPost(ctx context.Context, authKey, authToken, userAgent, text string)
 		Text: text,
 	}))
 	if err != nil {
-		return fmt.Errorf("Failed to CreatePost: %w", err)
+		return fmt.Errorf("failed to CreatePost: %w", err)
 	}
 	fmt.Println(resp.Msg.String())
 
