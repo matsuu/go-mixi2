@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package com.mixi.mercury.api;
+
+option go_package = "github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api;api";
+
+message CreatePostRequest {
+  string text = 1;
+}
+
+message ImageInfo {
+  string large_url = 1;
+  string large_mime_type = 2;
+  int32 large_width = 3;
+  int32 large_height = 4;
+  string small_url = 5;
+  string small_mime_type = 6;
+  int32 small_width = 7;
+  int32 small_height = 8;
+  string unknown9 = 9;
+}
+
+message MediaItem {
+  string media_id = 1;
+  int32 unknown3 = 3;
+  int32 unknown4 = 4;
+  ImageInfo image = 6;
+}
+
+message Timestamp {
+  int64 timestamp = 1;
+}
+
+message Post {
+  string post_id = 1;
+  string timestamp_ns = 2;
+  Timestamp created_at = 3;
+  string unknown4_id = 4;
+  MediaItem media = 7;
+  string text = 12;
+}
+
+message CreatePostResponse {
+  Post post = 1;
+}
+
+message GetPostsRequest {
+  string text = 1;
+}
+
+message GetPostsResponse {
+  Post post = 1;
+}
+
+message SwitchPersonaRequest {
+  string persona_id = 1;
+}
+
+message SwitchPersonaResponse {
+}
+
+message GetPersonasRequest {
+  string persona_id = 1;
+}
+
+message GetPersonasResponse {
+  Persona persona = 1;
+}
+
+message Persona {
+  string persona_id = 1;
+  string account_name = 2;
+  string display_name = 3;
+  string icon_url = 4;
+  string bio = 8;
+  string profile_url = 9;
+  Timestamp created_at = 17;
+}
+
+service MercuryService {
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
+  rpc GetPosts(GetPostsRequest) returns (GetPostsResponse) {}
+  rpc SwitchPersona(SwitchPersonaRequest) returns (SwitchPersonaResponse) {}
+  rpc GetPersonas(GetPersonasRequest) returns (GetPersonasResponse) {}
+}
