@@ -44,6 +44,8 @@ const (
 	// MercuryServiceGetPersonasProcedure is the fully-qualified name of the MercuryService's
 	// GetPersonas RPC.
 	MercuryServiceGetPersonasProcedure = "/com.mixi.mercury.api.MercuryService/GetPersonas"
+	// MercuryServiceGetMediaProcedure is the fully-qualified name of the MercuryService's GetMedia RPC.
+	MercuryServiceGetMediaProcedure = "/com.mixi.mercury.api.MercuryService/GetMedia"
 )
 
 // MercuryServiceClient is a client for the com.mixi.mercury.api.MercuryService service.
@@ -52,6 +54,7 @@ type MercuryServiceClient interface {
 	GetPosts(context.Context, *connect.Request[api.GetPostsRequest]) (*connect.Response[api.GetPostsResponse], error)
 	SwitchPersona(context.Context, *connect.Request[api.SwitchPersonaRequest]) (*connect.Response[api.SwitchPersonaResponse], error)
 	GetPersonas(context.Context, *connect.Request[api.GetPersonasRequest]) (*connect.Response[api.GetPersonasResponse], error)
+	GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error)
 }
 
 // NewMercuryServiceClient constructs a client for the com.mixi.mercury.api.MercuryService service.
@@ -89,6 +92,12 @@ func NewMercuryServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(mercuryServiceMethods.ByName("GetPersonas")),
 			connect.WithClientOptions(opts...),
 		),
+		getMedia: connect.NewClient[api.GetMediaRequest, api.GetMediaResponse](
+			httpClient,
+			baseURL+MercuryServiceGetMediaProcedure,
+			connect.WithSchema(mercuryServiceMethods.ByName("GetMedia")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -98,6 +107,7 @@ type mercuryServiceClient struct {
 	getPosts      *connect.Client[api.GetPostsRequest, api.GetPostsResponse]
 	switchPersona *connect.Client[api.SwitchPersonaRequest, api.SwitchPersonaResponse]
 	getPersonas   *connect.Client[api.GetPersonasRequest, api.GetPersonasResponse]
+	getMedia      *connect.Client[api.GetMediaRequest, api.GetMediaResponse]
 }
 
 // CreatePost calls com.mixi.mercury.api.MercuryService.CreatePost.
@@ -120,12 +130,18 @@ func (c *mercuryServiceClient) GetPersonas(ctx context.Context, req *connect.Req
 	return c.getPersonas.CallUnary(ctx, req)
 }
 
+// GetMedia calls com.mixi.mercury.api.MercuryService.GetMedia.
+func (c *mercuryServiceClient) GetMedia(ctx context.Context, req *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error) {
+	return c.getMedia.CallUnary(ctx, req)
+}
+
 // MercuryServiceHandler is an implementation of the com.mixi.mercury.api.MercuryService service.
 type MercuryServiceHandler interface {
 	CreatePost(context.Context, *connect.Request[api.CreatePostRequest]) (*connect.Response[api.CreatePostResponse], error)
 	GetPosts(context.Context, *connect.Request[api.GetPostsRequest]) (*connect.Response[api.GetPostsResponse], error)
 	SwitchPersona(context.Context, *connect.Request[api.SwitchPersonaRequest]) (*connect.Response[api.SwitchPersonaResponse], error)
 	GetPersonas(context.Context, *connect.Request[api.GetPersonasRequest]) (*connect.Response[api.GetPersonasResponse], error)
+	GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error)
 }
 
 // NewMercuryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -159,6 +175,12 @@ func NewMercuryServiceHandler(svc MercuryServiceHandler, opts ...connect.Handler
 		connect.WithSchema(mercuryServiceMethods.ByName("GetPersonas")),
 		connect.WithHandlerOptions(opts...),
 	)
+	mercuryServiceGetMediaHandler := connect.NewUnaryHandler(
+		MercuryServiceGetMediaProcedure,
+		svc.GetMedia,
+		connect.WithSchema(mercuryServiceMethods.ByName("GetMedia")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/com.mixi.mercury.api.MercuryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MercuryServiceCreatePostProcedure:
@@ -169,6 +191,8 @@ func NewMercuryServiceHandler(svc MercuryServiceHandler, opts ...connect.Handler
 			mercuryServiceSwitchPersonaHandler.ServeHTTP(w, r)
 		case MercuryServiceGetPersonasProcedure:
 			mercuryServiceGetPersonasHandler.ServeHTTP(w, r)
+		case MercuryServiceGetMediaProcedure:
+			mercuryServiceGetMediaHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -192,4 +216,8 @@ func (UnimplementedMercuryServiceHandler) SwitchPersona(context.Context, *connec
 
 func (UnimplementedMercuryServiceHandler) GetPersonas(context.Context, *connect.Request[api.GetPersonasRequest]) (*connect.Response[api.GetPersonasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("com.mixi.mercury.api.MercuryService.GetPersonas is not implemented"))
+}
+
+func (UnimplementedMercuryServiceHandler) GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("com.mixi.mercury.api.MercuryService.GetMedia is not implemented"))
 }

@@ -24,6 +24,9 @@ const (
 type CreatePostRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	ReplyTo       *string                `protobuf:"bytes,2,opt,name=reply_to,json=replyTo,proto3,oneof" json:"reply_to,omitempty"`
+	MediaId       *string                `protobuf:"bytes,4,opt,name=media_id,json=mediaId,proto3,oneof" json:"media_id,omitempty"`
+	CommunityId   *string                `protobuf:"bytes,7,opt,name=community_id,json=communityId,proto3,oneof" json:"community_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65,17 +68,38 @@ func (x *CreatePostRequest) GetText() string {
 	return ""
 }
 
+func (x *CreatePostRequest) GetReplyTo() string {
+	if x != nil && x.ReplyTo != nil {
+		return *x.ReplyTo
+	}
+	return ""
+}
+
+func (x *CreatePostRequest) GetMediaId() string {
+	if x != nil && x.MediaId != nil {
+		return *x.MediaId
+	}
+	return ""
+}
+
+func (x *CreatePostRequest) GetCommunityId() string {
+	if x != nil && x.CommunityId != nil {
+		return *x.CommunityId
+	}
+	return ""
+}
+
 type ImageInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	LargeUrl      string                 `protobuf:"bytes,1,opt,name=large_url,json=largeUrl,proto3" json:"large_url,omitempty"`
 	LargeMimeType string                 `protobuf:"bytes,2,opt,name=large_mime_type,json=largeMimeType,proto3" json:"large_mime_type,omitempty"`
-	LargeWidth    int32                  `protobuf:"varint,3,opt,name=large_width,json=largeWidth,proto3" json:"large_width,omitempty"`
-	LargeHeight   int32                  `protobuf:"varint,4,opt,name=large_height,json=largeHeight,proto3" json:"large_height,omitempty"`
+	LargeHeight   int32                  `protobuf:"varint,3,opt,name=large_height,json=largeHeight,proto3" json:"large_height,omitempty"`
+	LargeWidth    int32                  `protobuf:"varint,4,opt,name=large_width,json=largeWidth,proto3" json:"large_width,omitempty"`
 	SmallUrl      string                 `protobuf:"bytes,5,opt,name=small_url,json=smallUrl,proto3" json:"small_url,omitempty"`
 	SmallMimeType string                 `protobuf:"bytes,6,opt,name=small_mime_type,json=smallMimeType,proto3" json:"small_mime_type,omitempty"`
-	SmallWidth    int32                  `protobuf:"varint,7,opt,name=small_width,json=smallWidth,proto3" json:"small_width,omitempty"`
-	SmallHeight   int32                  `protobuf:"varint,8,opt,name=small_height,json=smallHeight,proto3" json:"small_height,omitempty"`
-	Unknown9      string                 `protobuf:"bytes,9,opt,name=unknown9,proto3" json:"unknown9,omitempty"`
+	SmallHeight   int32                  `protobuf:"varint,7,opt,name=small_height,json=smallHeight,proto3" json:"small_height,omitempty"`
+	SmallWidth    int32                  `protobuf:"varint,8,opt,name=small_width,json=smallWidth,proto3" json:"small_width,omitempty"`
+	BlurHash      string                 `protobuf:"bytes,9,opt,name=blur_hash,json=blurHash,proto3" json:"blur_hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -124,16 +148,16 @@ func (x *ImageInfo) GetLargeMimeType() string {
 	return ""
 }
 
-func (x *ImageInfo) GetLargeWidth() int32 {
+func (x *ImageInfo) GetLargeHeight() int32 {
 	if x != nil {
-		return x.LargeWidth
+		return x.LargeHeight
 	}
 	return 0
 }
 
-func (x *ImageInfo) GetLargeHeight() int32 {
+func (x *ImageInfo) GetLargeWidth() int32 {
 	if x != nil {
-		return x.LargeHeight
+		return x.LargeWidth
 	}
 	return 0
 }
@@ -152,13 +176,6 @@ func (x *ImageInfo) GetSmallMimeType() string {
 	return ""
 }
 
-func (x *ImageInfo) GetSmallWidth() int32 {
-	if x != nil {
-		return x.SmallWidth
-	}
-	return 0
-}
-
 func (x *ImageInfo) GetSmallHeight() int32 {
 	if x != nil {
 		return x.SmallHeight
@@ -166,9 +183,16 @@ func (x *ImageInfo) GetSmallHeight() int32 {
 	return 0
 }
 
-func (x *ImageInfo) GetUnknown9() string {
+func (x *ImageInfo) GetSmallWidth() int32 {
 	if x != nil {
-		return x.Unknown9
+		return x.SmallWidth
+	}
+	return 0
+}
+
+func (x *ImageInfo) GetBlurHash() string {
+	if x != nil {
+		return x.BlurHash
 	}
 	return ""
 }
@@ -177,8 +201,8 @@ type MediaItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MediaId       string                 `protobuf:"bytes,1,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
 	Unknown3      int32                  `protobuf:"varint,3,opt,name=unknown3,proto3" json:"unknown3,omitempty"`
-	Unknown4      int32                  `protobuf:"varint,4,opt,name=unknown4,proto3" json:"unknown4,omitempty"`
-	Image         *ImageInfo             `protobuf:"bytes,6,opt,name=image,proto3" json:"image,omitempty"`
+	Unknown4      int32                  `protobuf:"varint,4,opt,name=unknown4,proto3" json:"unknown4,omitempty"` // 1->2->3 (ok?)
+	Image         *ImageInfo             `protobuf:"bytes,6,opt,name=image,proto3,oneof" json:"image,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -761,30 +785,125 @@ func (x *Persona) GetCreatedAt() *Timestamp {
 	return nil
 }
 
+type GetMediaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MediaId       string                 `protobuf:"bytes,1,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMediaRequest) Reset() {
+	*x = GetMediaRequest{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMediaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMediaRequest) ProtoMessage() {}
+
+func (x *GetMediaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMediaRequest.ProtoReflect.Descriptor instead.
+func (*GetMediaRequest) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetMediaRequest) GetMediaId() string {
+	if x != nil {
+		return x.MediaId
+	}
+	return ""
+}
+
+type GetMediaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Media         *MediaItem             `protobuf:"bytes,1,opt,name=media,proto3" json:"media,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMediaResponse) Reset() {
+	*x = GetMediaResponse{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMediaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMediaResponse) ProtoMessage() {}
+
+func (x *GetMediaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMediaResponse.ProtoReflect.Descriptor instead.
+func (*GetMediaResponse) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetMediaResponse) GetMedia() *MediaItem {
+	if x != nil {
+		return x.Media
+	}
+	return nil
+}
+
 var File_com_mixi_mercury_api_mixi2_proto protoreflect.FileDescriptor
 
 const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\n" +
-	" com/mixi/mercury/api/mixi2.proto\x12\x14com.mixi.mercury.api\"'\n" +
+	" com/mixi/mercury/api/mixi2.proto\x12\x14com.mixi.mercury.api\"\xba\x01\n" +
 	"\x11CreatePostRequest\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\"\xb9\x02\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1e\n" +
+	"\breply_to\x18\x02 \x01(\tH\x00R\areplyTo\x88\x01\x01\x12\x1e\n" +
+	"\bmedia_id\x18\x04 \x01(\tH\x01R\amediaId\x88\x01\x01\x12&\n" +
+	"\fcommunity_id\x18\a \x01(\tH\x02R\vcommunityId\x88\x01\x01B\v\n" +
+	"\t_reply_toB\v\n" +
+	"\t_media_idB\x0f\n" +
+	"\r_community_id\"\xba\x02\n" +
 	"\tImageInfo\x12\x1b\n" +
 	"\tlarge_url\x18\x01 \x01(\tR\blargeUrl\x12&\n" +
-	"\x0flarge_mime_type\x18\x02 \x01(\tR\rlargeMimeType\x12\x1f\n" +
-	"\vlarge_width\x18\x03 \x01(\x05R\n" +
-	"largeWidth\x12!\n" +
-	"\flarge_height\x18\x04 \x01(\x05R\vlargeHeight\x12\x1b\n" +
+	"\x0flarge_mime_type\x18\x02 \x01(\tR\rlargeMimeType\x12!\n" +
+	"\flarge_height\x18\x03 \x01(\x05R\vlargeHeight\x12\x1f\n" +
+	"\vlarge_width\x18\x04 \x01(\x05R\n" +
+	"largeWidth\x12\x1b\n" +
 	"\tsmall_url\x18\x05 \x01(\tR\bsmallUrl\x12&\n" +
-	"\x0fsmall_mime_type\x18\x06 \x01(\tR\rsmallMimeType\x12\x1f\n" +
-	"\vsmall_width\x18\a \x01(\x05R\n" +
-	"smallWidth\x12!\n" +
-	"\fsmall_height\x18\b \x01(\x05R\vsmallHeight\x12\x1a\n" +
-	"\bunknown9\x18\t \x01(\tR\bunknown9\"\x95\x01\n" +
+	"\x0fsmall_mime_type\x18\x06 \x01(\tR\rsmallMimeType\x12!\n" +
+	"\fsmall_height\x18\a \x01(\x05R\vsmallHeight\x12\x1f\n" +
+	"\vsmall_width\x18\b \x01(\x05R\n" +
+	"smallWidth\x12\x1b\n" +
+	"\tblur_hash\x18\t \x01(\tR\bblurHash\"\xa4\x01\n" +
 	"\tMediaItem\x12\x19\n" +
 	"\bmedia_id\x18\x01 \x01(\tR\amediaId\x12\x1a\n" +
 	"\bunknown3\x18\x03 \x01(\x05R\bunknown3\x12\x1a\n" +
-	"\bunknown4\x18\x04 \x01(\x05R\bunknown4\x125\n" +
-	"\x05image\x18\x06 \x01(\v2\x1f.com.mixi.mercury.api.ImageInfoR\x05image\")\n" +
+	"\bunknown4\x18\x04 \x01(\x05R\bunknown4\x12:\n" +
+	"\x05image\x18\x06 \x01(\v2\x1f.com.mixi.mercury.api.ImageInfoH\x00R\x05image\x88\x01\x01B\b\n" +
+	"\x06_image\")\n" +
 	"\tTimestamp\x12\x1c\n" +
 	"\ttimestamp\x18\x01 \x01(\x03R\ttimestamp\"\xee\x01\n" +
 	"\x04Post\x12\x17\n" +
@@ -821,13 +940,18 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\vprofile_url\x18\t \x01(\tR\n" +
 	"profileUrl\x12>\n" +
 	"\n" +
-	"created_at\x18\x11 \x01(\v2\x1f.com.mixi.mercury.api.TimestampR\tcreatedAt2\xa2\x03\n" +
+	"created_at\x18\x11 \x01(\v2\x1f.com.mixi.mercury.api.TimestampR\tcreatedAt\",\n" +
+	"\x0fGetMediaRequest\x12\x19\n" +
+	"\bmedia_id\x18\x01 \x01(\tR\amediaId\"I\n" +
+	"\x10GetMediaResponse\x125\n" +
+	"\x05media\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media2\xff\x03\n" +
 	"\x0eMercuryService\x12a\n" +
 	"\n" +
 	"CreatePost\x12'.com.mixi.mercury.api.CreatePostRequest\x1a(.com.mixi.mercury.api.CreatePostResponse\"\x00\x12[\n" +
 	"\bGetPosts\x12%.com.mixi.mercury.api.GetPostsRequest\x1a&.com.mixi.mercury.api.GetPostsResponse\"\x00\x12j\n" +
 	"\rSwitchPersona\x12*.com.mixi.mercury.api.SwitchPersonaRequest\x1a+.com.mixi.mercury.api.SwitchPersonaResponse\"\x00\x12d\n" +
-	"\vGetPersonas\x12(.com.mixi.mercury.api.GetPersonasRequest\x1a).com.mixi.mercury.api.GetPersonasResponse\"\x00B9Z7github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api;apib\x06proto3"
+	"\vGetPersonas\x12(.com.mixi.mercury.api.GetPersonasRequest\x1a).com.mixi.mercury.api.GetPersonasResponse\"\x00\x12[\n" +
+	"\bGetMedia\x12%.com.mixi.mercury.api.GetMediaRequest\x1a&.com.mixi.mercury.api.GetMediaResponse\"\x00B9Z7github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api;apib\x06proto3"
 
 var (
 	file_com_mixi_mercury_api_mixi2_proto_rawDescOnce sync.Once
@@ -841,7 +965,7 @@ func file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP() []byte {
 	return file_com_mixi_mercury_api_mixi2_proto_rawDescData
 }
 
-var file_com_mixi_mercury_api_mixi2_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_com_mixi_mercury_api_mixi2_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_com_mixi_mercury_api_mixi2_proto_goTypes = []any{
 	(*CreatePostRequest)(nil),     // 0: com.mixi.mercury.api.CreatePostRequest
 	(*ImageInfo)(nil),             // 1: com.mixi.mercury.api.ImageInfo
@@ -856,6 +980,8 @@ var file_com_mixi_mercury_api_mixi2_proto_goTypes = []any{
 	(*GetPersonasRequest)(nil),    // 10: com.mixi.mercury.api.GetPersonasRequest
 	(*GetPersonasResponse)(nil),   // 11: com.mixi.mercury.api.GetPersonasResponse
 	(*Persona)(nil),               // 12: com.mixi.mercury.api.Persona
+	(*GetMediaRequest)(nil),       // 13: com.mixi.mercury.api.GetMediaRequest
+	(*GetMediaResponse)(nil),      // 14: com.mixi.mercury.api.GetMediaResponse
 }
 var file_com_mixi_mercury_api_mixi2_proto_depIdxs = []int32{
 	1,  // 0: com.mixi.mercury.api.MediaItem.image:type_name -> com.mixi.mercury.api.ImageInfo
@@ -865,19 +991,22 @@ var file_com_mixi_mercury_api_mixi2_proto_depIdxs = []int32{
 	4,  // 4: com.mixi.mercury.api.GetPostsResponse.post:type_name -> com.mixi.mercury.api.Post
 	12, // 5: com.mixi.mercury.api.GetPersonasResponse.persona:type_name -> com.mixi.mercury.api.Persona
 	3,  // 6: com.mixi.mercury.api.Persona.created_at:type_name -> com.mixi.mercury.api.Timestamp
-	0,  // 7: com.mixi.mercury.api.MercuryService.CreatePost:input_type -> com.mixi.mercury.api.CreatePostRequest
-	6,  // 8: com.mixi.mercury.api.MercuryService.GetPosts:input_type -> com.mixi.mercury.api.GetPostsRequest
-	8,  // 9: com.mixi.mercury.api.MercuryService.SwitchPersona:input_type -> com.mixi.mercury.api.SwitchPersonaRequest
-	10, // 10: com.mixi.mercury.api.MercuryService.GetPersonas:input_type -> com.mixi.mercury.api.GetPersonasRequest
-	5,  // 11: com.mixi.mercury.api.MercuryService.CreatePost:output_type -> com.mixi.mercury.api.CreatePostResponse
-	7,  // 12: com.mixi.mercury.api.MercuryService.GetPosts:output_type -> com.mixi.mercury.api.GetPostsResponse
-	9,  // 13: com.mixi.mercury.api.MercuryService.SwitchPersona:output_type -> com.mixi.mercury.api.SwitchPersonaResponse
-	11, // 14: com.mixi.mercury.api.MercuryService.GetPersonas:output_type -> com.mixi.mercury.api.GetPersonasResponse
-	11, // [11:15] is the sub-list for method output_type
-	7,  // [7:11] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	2,  // 7: com.mixi.mercury.api.GetMediaResponse.media:type_name -> com.mixi.mercury.api.MediaItem
+	0,  // 8: com.mixi.mercury.api.MercuryService.CreatePost:input_type -> com.mixi.mercury.api.CreatePostRequest
+	6,  // 9: com.mixi.mercury.api.MercuryService.GetPosts:input_type -> com.mixi.mercury.api.GetPostsRequest
+	8,  // 10: com.mixi.mercury.api.MercuryService.SwitchPersona:input_type -> com.mixi.mercury.api.SwitchPersonaRequest
+	10, // 11: com.mixi.mercury.api.MercuryService.GetPersonas:input_type -> com.mixi.mercury.api.GetPersonasRequest
+	13, // 12: com.mixi.mercury.api.MercuryService.GetMedia:input_type -> com.mixi.mercury.api.GetMediaRequest
+	5,  // 13: com.mixi.mercury.api.MercuryService.CreatePost:output_type -> com.mixi.mercury.api.CreatePostResponse
+	7,  // 14: com.mixi.mercury.api.MercuryService.GetPosts:output_type -> com.mixi.mercury.api.GetPostsResponse
+	9,  // 15: com.mixi.mercury.api.MercuryService.SwitchPersona:output_type -> com.mixi.mercury.api.SwitchPersonaResponse
+	11, // 16: com.mixi.mercury.api.MercuryService.GetPersonas:output_type -> com.mixi.mercury.api.GetPersonasResponse
+	14, // 17: com.mixi.mercury.api.MercuryService.GetMedia:output_type -> com.mixi.mercury.api.GetMediaResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_com_mixi_mercury_api_mixi2_proto_init() }
@@ -885,13 +1014,15 @@ func file_com_mixi_mercury_api_mixi2_proto_init() {
 	if File_com_mixi_mercury_api_mixi2_proto != nil {
 		return
 	}
+	file_com_mixi_mercury_api_mixi2_proto_msgTypes[0].OneofWrappers = []any{}
+	file_com_mixi_mercury_api_mixi2_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_mixi_mercury_api_mixi2_proto_rawDesc), len(file_com_mixi_mercury_api_mixi2_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

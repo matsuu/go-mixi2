@@ -13,11 +13,15 @@ import (
 	"github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api"
 )
 
-func createPost(ctx context.Context, authKey, authToken, userAgent, text string) error {
+func createPost(ctx context.Context, authKey, authToken, userAgent, text string, community string) error {
 	client := mixi2.NewClient(mixi2.WithAuth(authKey, authToken, userAgent))
-	resp, err := client.CreatePost(ctx, connect.NewRequest(&api.CreatePostRequest{
+	post := api.CreatePostRequest{
 		Text: text,
-	}))
+	}
+	if community != "" {
+		post.CommunityId = &community
+	}
+	resp, err := client.CreatePost(ctx, connect.NewRequest(&post))
 	if err != nil {
 		return fmt.Errorf("failed to CreatePost: %w", err)
 	}
@@ -31,6 +35,7 @@ func main() {
 	authToken := flag.String("token", "", "auth_token in Cookie")
 	ua := flag.String("ua", "", "X-Mercury-User-Agent in Request Header")
 	text := flag.String("text", "", "post text")
+	community := flag.String("community", "", "community id")
 	flag.Parse()
 
 	var missings []string
@@ -52,7 +57,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := createPost(context.Background(), *authKey, *authToken, *ua, *text); err != nil {
+	if err := createPost(context.Background(), *authKey, *authToken, *ua, *text, *community); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
