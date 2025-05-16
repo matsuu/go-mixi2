@@ -2,7 +2,7 @@
 
 Tool for posting to mixi2.
 
-## Prepare
+## Install
 
 ```
 go install github.com/matsuu/go-mixi2/cmd/mixi2_post@latest
@@ -22,4 +22,13 @@ go install github.com/matsuu/go-mixi2/cmd/mixi2_post@latest
 
 ```
 mixi2_post -token="your_auth_token" -key="your_auth_key" -ua="your_user_agent" -text="your_soul"
+```
+
+## Build
+
+[Install Connect tools](https://connectrpc.com/docs/go/getting-started/)
+
+```
+buf generate
+go build ./cmd/mixi2_post
 ```

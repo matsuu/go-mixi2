@@ -1,3 +1,4 @@
+// Package mixi2 provides a client for interacting with the Mixi Mercury API using connect-go.
 package mixi2
 
 import (
@@ -20,6 +21,7 @@ const (
 	userAgentHeader     = "X-Mercury-User-Agent"
 )
 
+// WithAuth returns a connect.ClientOption that injects authentication headers and cookies.
 func WithAuth(authKey, authToken, userAgent string) connect.ClientOption {
 	return connect.WithInterceptors(func() connect.UnaryInterceptorFunc {
 		interceptor := func(next connect.UnaryFunc) connect.UnaryFunc {
@@ -74,6 +76,7 @@ func WithAuth(authKey, authToken, userAgent string) connect.ClientOption {
 	}())
 }
 
+// NewClient returns a new MercuryServiceClient configured with the provided client options.
 func NewClient(opts ...connect.ClientOption) apiconnect.MercuryServiceClient {
 	client := apiconnect.NewMercuryServiceClient(
 		http.DefaultClient,
