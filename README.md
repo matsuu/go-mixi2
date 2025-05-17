@@ -1,12 +1,7 @@
 # go-mixi2
+[![Go Reference](https://pkg.go.dev/badge/github.com/matsuu/go-mixi2.svg)](https://pkg.go.dev/github.com/matsuu/go-mixi2)
 
-Tool for posting to mixi2.
-
-## Install
-
-```
-go install github.com/matsuu/go-mixi2/cmd/mixi2_post@latest
-```
+Unofficial mixi2 client in Go.
 
 ## Usage
 
@@ -20,8 +15,44 @@ go install github.com/matsuu/go-mixi2/cmd/mixi2_post@latest
     * The value of the X-Mercury-User-Agent header.
 * Pass the values you have identified as follows:
 
-```
-mixi2_post -token="your_auth_token" -key="your_auth_key" -ua="your_user_agent" -text="your_soul"
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"connectrpc.com/connect"
+
+	"github.com/matsuu/go-mixi2"
+	"github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api"
+)
+
+func createPost(ctx context.Context, authKey, authToken, userAgent, text string) error {
+	client := mixi2.NewClient(mixi2.WithAuth(authKey, authToken, userAgent))
+	post := api.CreatePostRequest{
+		Text: text,
+	}
+	resp, err := client.CreatePost(ctx, connect.NewRequest(&post))
+	if err != nil {
+		return fmt.Errorf("failed to CreatePost: %w", err)
+	}
+	fmt.Println(resp.Msg.String())
+
+	return nil
+}
+
+func main() {
+    authKey := os.Getenv("MIXI2_AUTH_KEY")
+    authToken := os.Getenv("MIXI2_AUTH_TOKEN")
+    ua := os.Getenv("MIXI2_USER_AGENT")
+    text := "42"
+	if err := createPost(context.Background(), authKey, authToken, ua, text); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+}
 ```
 
 ## Build
@@ -30,5 +61,8 @@ mixi2_post -token="your_auth_token" -key="your_auth_key" -ua="your_user_agent" -
 
 ```
 buf generate
-go build ./cmd/mixi2_post
 ```
+
+## References
+
+* [mixi2](https://mixi.social/)

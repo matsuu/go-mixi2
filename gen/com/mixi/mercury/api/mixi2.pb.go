@@ -309,21 +309,201 @@ func (x *Timestamp) GetTimestamp() int64 {
 	return 0
 }
 
+type CommunityInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Media         *MediaItem             `protobuf:"bytes,6,opt,name=media,proto3" json:"media,omitempty"`
+	Unknown11     string                 `protobuf:"bytes,11,opt,name=unknown11,proto3" json:"unknown11,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CommunityInfo) Reset() {
+	*x = CommunityInfo{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommunityInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommunityInfo) ProtoMessage() {}
+
+func (x *CommunityInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommunityInfo.ProtoReflect.Descriptor instead.
+func (*CommunityInfo) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CommunityInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CommunityInfo) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CommunityInfo) GetMedia() *MediaItem {
+	if x != nil {
+		return x.Media
+	}
+	return nil
+}
+
+func (x *CommunityInfo) GetUnknown11() string {
+	if x != nil {
+		return x.Unknown11
+	}
+	return ""
+}
+
+type StampInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	StampUrl      string                 `protobuf:"bytes,2,opt,name=stamp_url,json=stampUrl,proto3" json:"stamp_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StampInfo) Reset() {
+	*x = StampInfo{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StampInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StampInfo) ProtoMessage() {}
+
+func (x *StampInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StampInfo.ProtoReflect.Descriptor instead.
+func (*StampInfo) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StampInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *StampInfo) GetStampUrl() string {
+	if x != nil {
+		return x.StampUrl
+	}
+	return ""
+}
+
+type Stamp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StampInfo     *StampInfo             `protobuf:"bytes,1,opt,name=stamp_info,json=stampInfo,proto3" json:"stamp_info,omitempty"`
+	Click         int32                  `protobuf:"varint,2,opt,name=click,proto3" json:"click,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Stamp) Reset() {
+	*x = Stamp{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Stamp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Stamp) ProtoMessage() {}
+
+func (x *Stamp) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Stamp.ProtoReflect.Descriptor instead.
+func (*Stamp) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Stamp) GetStampInfo() *StampInfo {
+	if x != nil {
+		return x.StampInfo
+	}
+	return nil
+}
+
+func (x *Stamp) GetClick() int32 {
+	if x != nil {
+		return x.Click
+	}
+	return 0
+}
+
 type Post struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PostId        string                 `protobuf:"bytes,1,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	TimestampNs   string                 `protobuf:"bytes,2,opt,name=timestamp_ns,json=timestampNs,proto3" json:"timestamp_ns,omitempty"`
 	CreatedAt     *Timestamp             `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Unknown4Id    string                 `protobuf:"bytes,4,opt,name=unknown4_id,json=unknown4Id,proto3" json:"unknown4_id,omitempty"`
-	Media         *MediaItem             `protobuf:"bytes,7,opt,name=media,proto3" json:"media,omitempty"`
+	Media         *MediaItem             `protobuf:"bytes,7,opt,name=media,proto3,oneof" json:"media,omitempty"`
+	Unknown8      *int32                 `protobuf:"varint,8,opt,name=unknown8,proto3,oneof" json:"unknown8,omitempty"`
+	Unknown9      *int32                 `protobuf:"varint,9,opt,name=unknown9,proto3,oneof" json:"unknown9,omitempty"`
+	Unknown10     *string                `protobuf:"bytes,10,opt,name=unknown10,proto3,oneof" json:"unknown10,omitempty"`
 	Text          string                 `protobuf:"bytes,12,opt,name=text,proto3" json:"text,omitempty"`
+	ParentPostId  *string                `protobuf:"bytes,13,opt,name=parent_post_id,json=parentPostId,proto3,oneof" json:"parent_post_id,omitempty"`
+	ParentPost    *Post                  `protobuf:"bytes,19,opt,name=parent_post,json=parentPost,proto3,oneof" json:"parent_post,omitempty"`
+	Unkonwn21     *int32                 `protobuf:"varint,21,opt,name=unkonwn21,proto3,oneof" json:"unkonwn21,omitempty"`
+	Community     *CommunityInfo         `protobuf:"bytes,25,opt,name=community,proto3,oneof" json:"community,omitempty"`
+	Stamps        []*Stamp               `protobuf:"bytes,29,rep,name=stamps,proto3" json:"stamps,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Post) Reset() {
 	*x = Post{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[4]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -335,7 +515,7 @@ func (x *Post) String() string {
 func (*Post) ProtoMessage() {}
 
 func (x *Post) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[4]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -348,12 +528,12 @@ func (x *Post) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Post.ProtoReflect.Descriptor instead.
 func (*Post) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{4}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *Post) GetPostId() string {
+func (x *Post) GetId() string {
 	if x != nil {
-		return x.PostId
+		return x.Id
 	}
 	return ""
 }
@@ -386,11 +566,67 @@ func (x *Post) GetMedia() *MediaItem {
 	return nil
 }
 
+func (x *Post) GetUnknown8() int32 {
+	if x != nil && x.Unknown8 != nil {
+		return *x.Unknown8
+	}
+	return 0
+}
+
+func (x *Post) GetUnknown9() int32 {
+	if x != nil && x.Unknown9 != nil {
+		return *x.Unknown9
+	}
+	return 0
+}
+
+func (x *Post) GetUnknown10() string {
+	if x != nil && x.Unknown10 != nil {
+		return *x.Unknown10
+	}
+	return ""
+}
+
 func (x *Post) GetText() string {
 	if x != nil {
 		return x.Text
 	}
 	return ""
+}
+
+func (x *Post) GetParentPostId() string {
+	if x != nil && x.ParentPostId != nil {
+		return *x.ParentPostId
+	}
+	return ""
+}
+
+func (x *Post) GetParentPost() *Post {
+	if x != nil {
+		return x.ParentPost
+	}
+	return nil
+}
+
+func (x *Post) GetUnkonwn21() int32 {
+	if x != nil && x.Unkonwn21 != nil {
+		return *x.Unkonwn21
+	}
+	return 0
+}
+
+func (x *Post) GetCommunity() *CommunityInfo {
+	if x != nil {
+		return x.Community
+	}
+	return nil
+}
+
+func (x *Post) GetStamps() []*Stamp {
+	if x != nil {
+		return x.Stamps
+	}
+	return nil
 }
 
 type CreatePostResponse struct {
@@ -402,7 +638,7 @@ type CreatePostResponse struct {
 
 func (x *CreatePostResponse) Reset() {
 	*x = CreatePostResponse{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[5]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -414,7 +650,7 @@ func (x *CreatePostResponse) String() string {
 func (*CreatePostResponse) ProtoMessage() {}
 
 func (x *CreatePostResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[5]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -427,7 +663,7 @@ func (x *CreatePostResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePostResponse.ProtoReflect.Descriptor instead.
 func (*CreatePostResponse) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{5}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreatePostResponse) GetPost() *Post {
@@ -446,7 +682,7 @@ type GetPostsRequest struct {
 
 func (x *GetPostsRequest) Reset() {
 	*x = GetPostsRequest{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[6]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -458,7 +694,7 @@ func (x *GetPostsRequest) String() string {
 func (*GetPostsRequest) ProtoMessage() {}
 
 func (x *GetPostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[6]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +707,7 @@ func (x *GetPostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPostsRequest.ProtoReflect.Descriptor instead.
 func (*GetPostsRequest) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{6}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetPostsRequest) GetText() string {
@@ -490,7 +726,7 @@ type GetPostsResponse struct {
 
 func (x *GetPostsResponse) Reset() {
 	*x = GetPostsResponse{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[7]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -502,7 +738,7 @@ func (x *GetPostsResponse) String() string {
 func (*GetPostsResponse) ProtoMessage() {}
 
 func (x *GetPostsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[7]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,7 +751,7 @@ func (x *GetPostsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPostsResponse.ProtoReflect.Descriptor instead.
 func (*GetPostsResponse) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{7}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetPostsResponse) GetPost() *Post {
@@ -534,7 +770,7 @@ type SwitchPersonaRequest struct {
 
 func (x *SwitchPersonaRequest) Reset() {
 	*x = SwitchPersonaRequest{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[8]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -546,7 +782,7 @@ func (x *SwitchPersonaRequest) String() string {
 func (*SwitchPersonaRequest) ProtoMessage() {}
 
 func (x *SwitchPersonaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[8]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -559,7 +795,7 @@ func (x *SwitchPersonaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwitchPersonaRequest.ProtoReflect.Descriptor instead.
 func (*SwitchPersonaRequest) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{8}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SwitchPersonaRequest) GetPersonaId() string {
@@ -577,7 +813,7 @@ type SwitchPersonaResponse struct {
 
 func (x *SwitchPersonaResponse) Reset() {
 	*x = SwitchPersonaResponse{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[9]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -589,7 +825,7 @@ func (x *SwitchPersonaResponse) String() string {
 func (*SwitchPersonaResponse) ProtoMessage() {}
 
 func (x *SwitchPersonaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[9]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,7 +838,7 @@ func (x *SwitchPersonaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwitchPersonaResponse.ProtoReflect.Descriptor instead.
 func (*SwitchPersonaResponse) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{9}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{12}
 }
 
 type GetPersonasRequest struct {
@@ -614,7 +850,7 @@ type GetPersonasRequest struct {
 
 func (x *GetPersonasRequest) Reset() {
 	*x = GetPersonasRequest{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[10]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +862,7 @@ func (x *GetPersonasRequest) String() string {
 func (*GetPersonasRequest) ProtoMessage() {}
 
 func (x *GetPersonasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[10]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +875,7 @@ func (x *GetPersonasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPersonasRequest.ProtoReflect.Descriptor instead.
 func (*GetPersonasRequest) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{10}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetPersonasRequest) GetPersonaId() string {
@@ -658,7 +894,7 @@ type GetPersonasResponse struct {
 
 func (x *GetPersonasResponse) Reset() {
 	*x = GetPersonasResponse{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[11]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -670,7 +906,7 @@ func (x *GetPersonasResponse) String() string {
 func (*GetPersonasResponse) ProtoMessage() {}
 
 func (x *GetPersonasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[11]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +919,7 @@ func (x *GetPersonasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPersonasResponse.ProtoReflect.Descriptor instead.
 func (*GetPersonasResponse) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{11}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetPersonasResponse) GetPersona() *Persona {
@@ -708,7 +944,7 @@ type Persona struct {
 
 func (x *Persona) Reset() {
 	*x = Persona{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[12]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -720,7 +956,7 @@ func (x *Persona) String() string {
 func (*Persona) ProtoMessage() {}
 
 func (x *Persona) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[12]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -733,7 +969,7 @@ func (x *Persona) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Persona.ProtoReflect.Descriptor instead.
 func (*Persona) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{12}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Persona) GetPersonaId() string {
@@ -794,7 +1030,7 @@ type GetMediaRequest struct {
 
 func (x *GetMediaRequest) Reset() {
 	*x = GetMediaRequest{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -806,7 +1042,7 @@ func (x *GetMediaRequest) String() string {
 func (*GetMediaRequest) ProtoMessage() {}
 
 func (x *GetMediaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[13]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -819,7 +1055,7 @@ func (x *GetMediaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMediaRequest.ProtoReflect.Descriptor instead.
 func (*GetMediaRequest) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{13}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetMediaRequest) GetMediaId() string {
@@ -838,7 +1074,7 @@ type GetMediaResponse struct {
 
 func (x *GetMediaResponse) Reset() {
 	*x = GetMediaResponse{}
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -850,7 +1086,7 @@ func (x *GetMediaResponse) String() string {
 func (*GetMediaResponse) ProtoMessage() {}
 
 func (x *GetMediaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[14]
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -863,12 +1099,272 @@ func (x *GetMediaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMediaResponse.ProtoReflect.Descriptor instead.
 func (*GetMediaResponse) Descriptor() ([]byte, []int) {
-	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{14}
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetMediaResponse) GetMedia() *MediaItem {
 	if x != nil {
 		return x.Media
+	}
+	return nil
+}
+
+type GetSubscribingFeedsRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	NextTimestampNs *string                `protobuf:"bytes,1,opt,name=next_timestamp_ns,json=nextTimestampNs,proto3,oneof" json:"next_timestamp_ns,omitempty"`
+	Count           int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetSubscribingFeedsRequest) Reset() {
+	*x = GetSubscribingFeedsRequest{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubscribingFeedsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubscribingFeedsRequest) ProtoMessage() {}
+
+func (x *GetSubscribingFeedsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubscribingFeedsRequest.ProtoReflect.Descriptor instead.
+func (*GetSubscribingFeedsRequest) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetSubscribingFeedsRequest) GetNextTimestampNs() string {
+	if x != nil && x.NextTimestampNs != nil {
+		return *x.NextTimestampNs
+	}
+	return ""
+}
+
+func (x *GetSubscribingFeedsRequest) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type GetSubscribingFeedsResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Feeds           []*Feed                `protobuf:"bytes,1,rep,name=feeds,proto3" json:"feeds,omitempty"`
+	NextTimestampNs string                 `protobuf:"bytes,2,opt,name=next_timestamp_ns,json=nextTimestampNs,proto3" json:"next_timestamp_ns,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetSubscribingFeedsResponse) Reset() {
+	*x = GetSubscribingFeedsResponse{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubscribingFeedsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubscribingFeedsResponse) ProtoMessage() {}
+
+func (x *GetSubscribingFeedsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubscribingFeedsResponse.ProtoReflect.Descriptor instead.
+func (*GetSubscribingFeedsResponse) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetSubscribingFeedsResponse) GetFeeds() []*Feed {
+	if x != nil {
+		return x.Feeds
+	}
+	return nil
+}
+
+func (x *GetSubscribingFeedsResponse) GetNextTimestampNs() string {
+	if x != nil {
+		return x.NextTimestampNs
+	}
+	return ""
+}
+
+type Feed struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Unknown1      int32                  `protobuf:"varint,1,opt,name=unknown1,proto3" json:"unknown1,omitempty"`
+	TimestampNs   string                 `protobuf:"bytes,2,opt,name=timestamp_ns,json=timestampNs,proto3" json:"timestamp_ns,omitempty"`
+	Post          *Post                  `protobuf:"bytes,3,opt,name=post,proto3" json:"post,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Feed) Reset() {
+	*x = Feed{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Feed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Feed) ProtoMessage() {}
+
+func (x *Feed) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Feed.ProtoReflect.Descriptor instead.
+func (*Feed) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *Feed) GetUnknown1() int32 {
+	if x != nil {
+		return x.Unknown1
+	}
+	return 0
+}
+
+func (x *Feed) GetTimestampNs() string {
+	if x != nil {
+		return x.TimestampNs
+	}
+	return ""
+}
+
+func (x *Feed) GetPost() *Post {
+	if x != nil {
+		return x.Post
+	}
+	return nil
+}
+
+type GetRecommendedTimelineRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	NextTimestampNs *string                `protobuf:"bytes,1,opt,name=next_timestamp_ns,json=nextTimestampNs,proto3,oneof" json:"next_timestamp_ns,omitempty"`
+	Count           int32                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetRecommendedTimelineRequest) Reset() {
+	*x = GetRecommendedTimelineRequest{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRecommendedTimelineRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRecommendedTimelineRequest) ProtoMessage() {}
+
+func (x *GetRecommendedTimelineRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRecommendedTimelineRequest.ProtoReflect.Descriptor instead.
+func (*GetRecommendedTimelineRequest) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetRecommendedTimelineRequest) GetNextTimestampNs() string {
+	if x != nil && x.NextTimestampNs != nil {
+		return *x.NextTimestampNs
+	}
+	return ""
+}
+
+func (x *GetRecommendedTimelineRequest) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type GetRecommendedTimelineResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Posts         []*Post                `protobuf:"bytes,1,rep,name=posts,proto3" json:"posts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRecommendedTimelineResponse) Reset() {
+	*x = GetRecommendedTimelineResponse{}
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRecommendedTimelineResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRecommendedTimelineResponse) ProtoMessage() {}
+
+func (x *GetRecommendedTimelineResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_mixi_mercury_api_mixi2_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRecommendedTimelineResponse.ProtoReflect.Descriptor instead.
+func (*GetRecommendedTimelineResponse) Descriptor() ([]byte, []int) {
+	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetRecommendedTimelineResponse) GetPosts() []*Post {
+	if x != nil {
+		return x.Posts
 	}
 	return nil
 }
@@ -905,16 +1401,49 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\x05image\x18\x06 \x01(\v2\x1f.com.mixi.mercury.api.ImageInfoH\x00R\x05image\x88\x01\x01B\b\n" +
 	"\x06_image\")\n" +
 	"\tTimestamp\x12\x1c\n" +
-	"\ttimestamp\x18\x01 \x01(\x03R\ttimestamp\"\xee\x01\n" +
-	"\x04Post\x12\x17\n" +
-	"\apost_id\x18\x01 \x01(\tR\x06postId\x12!\n" +
+	"\ttimestamp\x18\x01 \x01(\x03R\ttimestamp\"\x8a\x01\n" +
+	"\rCommunityInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x125\n" +
+	"\x05media\x18\x06 \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media\x12\x1c\n" +
+	"\tunknown11\x18\v \x01(\tR\tunknown11\"<\n" +
+	"\tStampInfo\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
+	"\tstamp_url\x18\x02 \x01(\tR\bstampUrl\"]\n" +
+	"\x05Stamp\x12>\n" +
+	"\n" +
+	"stamp_info\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.StampInfoR\tstampInfo\x12\x14\n" +
+	"\x05click\x18\x02 \x01(\x05R\x05click\"\xcd\x05\n" +
+	"\x04Post\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\ftimestamp_ns\x18\x02 \x01(\tR\vtimestampNs\x12>\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1f.com.mixi.mercury.api.TimestampR\tcreatedAt\x12\x1f\n" +
 	"\vunknown4_id\x18\x04 \x01(\tR\n" +
-	"unknown4Id\x125\n" +
-	"\x05media\x18\a \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media\x12\x12\n" +
-	"\x04text\x18\f \x01(\tR\x04text\"D\n" +
+	"unknown4Id\x12:\n" +
+	"\x05media\x18\a \x01(\v2\x1f.com.mixi.mercury.api.MediaItemH\x00R\x05media\x88\x01\x01\x12\x1f\n" +
+	"\bunknown8\x18\b \x01(\x05H\x01R\bunknown8\x88\x01\x01\x12\x1f\n" +
+	"\bunknown9\x18\t \x01(\x05H\x02R\bunknown9\x88\x01\x01\x12!\n" +
+	"\tunknown10\x18\n" +
+	" \x01(\tH\x03R\tunknown10\x88\x01\x01\x12\x12\n" +
+	"\x04text\x18\f \x01(\tR\x04text\x12)\n" +
+	"\x0eparent_post_id\x18\r \x01(\tH\x04R\fparentPostId\x88\x01\x01\x12@\n" +
+	"\vparent_post\x18\x13 \x01(\v2\x1a.com.mixi.mercury.api.PostH\x05R\n" +
+	"parentPost\x88\x01\x01\x12!\n" +
+	"\tunkonwn21\x18\x15 \x01(\x05H\x06R\tunkonwn21\x88\x01\x01\x12F\n" +
+	"\tcommunity\x18\x19 \x01(\v2#.com.mixi.mercury.api.CommunityInfoH\aR\tcommunity\x88\x01\x01\x123\n" +
+	"\x06stamps\x18\x1d \x03(\v2\x1b.com.mixi.mercury.api.StampR\x06stampsB\b\n" +
+	"\x06_mediaB\v\n" +
+	"\t_unknown8B\v\n" +
+	"\t_unknown9B\f\n" +
+	"\n" +
+	"_unknown10B\x11\n" +
+	"\x0f_parent_post_idB\x0e\n" +
+	"\f_parent_postB\f\n" +
+	"\n" +
+	"_unkonwn21B\f\n" +
+	"\n" +
+	"_community\"D\n" +
 	"\x12CreatePostResponse\x12.\n" +
 	"\x04post\x18\x01 \x01(\v2\x1a.com.mixi.mercury.api.PostR\x04post\"%\n" +
 	"\x0fGetPostsRequest\x12\x12\n" +
@@ -944,14 +1473,33 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\x0fGetMediaRequest\x12\x19\n" +
 	"\bmedia_id\x18\x01 \x01(\tR\amediaId\"I\n" +
 	"\x10GetMediaResponse\x125\n" +
-	"\x05media\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media2\xff\x03\n" +
+	"\x05media\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media\"y\n" +
+	"\x1aGetSubscribingFeedsRequest\x12/\n" +
+	"\x11next_timestamp_ns\x18\x01 \x01(\tH\x00R\x0fnextTimestampNs\x88\x01\x01\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x05R\x05countB\x14\n" +
+	"\x12_next_timestamp_ns\"{\n" +
+	"\x1bGetSubscribingFeedsResponse\x120\n" +
+	"\x05feeds\x18\x01 \x03(\v2\x1a.com.mixi.mercury.api.FeedR\x05feeds\x12*\n" +
+	"\x11next_timestamp_ns\x18\x02 \x01(\tR\x0fnextTimestampNs\"u\n" +
+	"\x04Feed\x12\x1a\n" +
+	"\bunknown1\x18\x01 \x01(\x05R\bunknown1\x12!\n" +
+	"\ftimestamp_ns\x18\x02 \x01(\tR\vtimestampNs\x12.\n" +
+	"\x04post\x18\x03 \x01(\v2\x1a.com.mixi.mercury.api.PostR\x04post\"|\n" +
+	"\x1dGetRecommendedTimelineRequest\x12/\n" +
+	"\x11next_timestamp_ns\x18\x01 \x01(\tH\x00R\x0fnextTimestampNs\x88\x01\x01\x12\x14\n" +
+	"\x05count\x18\x03 \x01(\x05R\x05countB\x14\n" +
+	"\x12_next_timestamp_ns\"R\n" +
+	"\x1eGetRecommendedTimelineResponse\x120\n" +
+	"\x05posts\x18\x01 \x03(\v2\x1a.com.mixi.mercury.api.PostR\x05posts2\x85\x06\n" +
 	"\x0eMercuryService\x12a\n" +
 	"\n" +
 	"CreatePost\x12'.com.mixi.mercury.api.CreatePostRequest\x1a(.com.mixi.mercury.api.CreatePostResponse\"\x00\x12[\n" +
 	"\bGetPosts\x12%.com.mixi.mercury.api.GetPostsRequest\x1a&.com.mixi.mercury.api.GetPostsResponse\"\x00\x12j\n" +
 	"\rSwitchPersona\x12*.com.mixi.mercury.api.SwitchPersonaRequest\x1a+.com.mixi.mercury.api.SwitchPersonaResponse\"\x00\x12d\n" +
 	"\vGetPersonas\x12(.com.mixi.mercury.api.GetPersonasRequest\x1a).com.mixi.mercury.api.GetPersonasResponse\"\x00\x12[\n" +
-	"\bGetMedia\x12%.com.mixi.mercury.api.GetMediaRequest\x1a&.com.mixi.mercury.api.GetMediaResponse\"\x00B9Z7github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api;apib\x06proto3"
+	"\bGetMedia\x12%.com.mixi.mercury.api.GetMediaRequest\x1a&.com.mixi.mercury.api.GetMediaResponse\"\x00\x12|\n" +
+	"\x13GetSubscribingFeeds\x120.com.mixi.mercury.api.GetSubscribingFeedsRequest\x1a1.com.mixi.mercury.api.GetSubscribingFeedsResponse\"\x00\x12\x85\x01\n" +
+	"\x16GetRecommendedTimeline\x123.com.mixi.mercury.api.GetRecommendedTimelineRequest\x1a4.com.mixi.mercury.api.GetRecommendedTimelineResponse\"\x00B9Z7github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api;apib\x06proto3"
 
 var (
 	file_com_mixi_mercury_api_mixi2_proto_rawDescOnce sync.Once
@@ -965,48 +1513,68 @@ func file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP() []byte {
 	return file_com_mixi_mercury_api_mixi2_proto_rawDescData
 }
 
-var file_com_mixi_mercury_api_mixi2_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_com_mixi_mercury_api_mixi2_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_com_mixi_mercury_api_mixi2_proto_goTypes = []any{
-	(*CreatePostRequest)(nil),     // 0: com.mixi.mercury.api.CreatePostRequest
-	(*ImageInfo)(nil),             // 1: com.mixi.mercury.api.ImageInfo
-	(*MediaItem)(nil),             // 2: com.mixi.mercury.api.MediaItem
-	(*Timestamp)(nil),             // 3: com.mixi.mercury.api.Timestamp
-	(*Post)(nil),                  // 4: com.mixi.mercury.api.Post
-	(*CreatePostResponse)(nil),    // 5: com.mixi.mercury.api.CreatePostResponse
-	(*GetPostsRequest)(nil),       // 6: com.mixi.mercury.api.GetPostsRequest
-	(*GetPostsResponse)(nil),      // 7: com.mixi.mercury.api.GetPostsResponse
-	(*SwitchPersonaRequest)(nil),  // 8: com.mixi.mercury.api.SwitchPersonaRequest
-	(*SwitchPersonaResponse)(nil), // 9: com.mixi.mercury.api.SwitchPersonaResponse
-	(*GetPersonasRequest)(nil),    // 10: com.mixi.mercury.api.GetPersonasRequest
-	(*GetPersonasResponse)(nil),   // 11: com.mixi.mercury.api.GetPersonasResponse
-	(*Persona)(nil),               // 12: com.mixi.mercury.api.Persona
-	(*GetMediaRequest)(nil),       // 13: com.mixi.mercury.api.GetMediaRequest
-	(*GetMediaResponse)(nil),      // 14: com.mixi.mercury.api.GetMediaResponse
+	(*CreatePostRequest)(nil),              // 0: com.mixi.mercury.api.CreatePostRequest
+	(*ImageInfo)(nil),                      // 1: com.mixi.mercury.api.ImageInfo
+	(*MediaItem)(nil),                      // 2: com.mixi.mercury.api.MediaItem
+	(*Timestamp)(nil),                      // 3: com.mixi.mercury.api.Timestamp
+	(*CommunityInfo)(nil),                  // 4: com.mixi.mercury.api.CommunityInfo
+	(*StampInfo)(nil),                      // 5: com.mixi.mercury.api.StampInfo
+	(*Stamp)(nil),                          // 6: com.mixi.mercury.api.Stamp
+	(*Post)(nil),                           // 7: com.mixi.mercury.api.Post
+	(*CreatePostResponse)(nil),             // 8: com.mixi.mercury.api.CreatePostResponse
+	(*GetPostsRequest)(nil),                // 9: com.mixi.mercury.api.GetPostsRequest
+	(*GetPostsResponse)(nil),               // 10: com.mixi.mercury.api.GetPostsResponse
+	(*SwitchPersonaRequest)(nil),           // 11: com.mixi.mercury.api.SwitchPersonaRequest
+	(*SwitchPersonaResponse)(nil),          // 12: com.mixi.mercury.api.SwitchPersonaResponse
+	(*GetPersonasRequest)(nil),             // 13: com.mixi.mercury.api.GetPersonasRequest
+	(*GetPersonasResponse)(nil),            // 14: com.mixi.mercury.api.GetPersonasResponse
+	(*Persona)(nil),                        // 15: com.mixi.mercury.api.Persona
+	(*GetMediaRequest)(nil),                // 16: com.mixi.mercury.api.GetMediaRequest
+	(*GetMediaResponse)(nil),               // 17: com.mixi.mercury.api.GetMediaResponse
+	(*GetSubscribingFeedsRequest)(nil),     // 18: com.mixi.mercury.api.GetSubscribingFeedsRequest
+	(*GetSubscribingFeedsResponse)(nil),    // 19: com.mixi.mercury.api.GetSubscribingFeedsResponse
+	(*Feed)(nil),                           // 20: com.mixi.mercury.api.Feed
+	(*GetRecommendedTimelineRequest)(nil),  // 21: com.mixi.mercury.api.GetRecommendedTimelineRequest
+	(*GetRecommendedTimelineResponse)(nil), // 22: com.mixi.mercury.api.GetRecommendedTimelineResponse
 }
 var file_com_mixi_mercury_api_mixi2_proto_depIdxs = []int32{
 	1,  // 0: com.mixi.mercury.api.MediaItem.image:type_name -> com.mixi.mercury.api.ImageInfo
-	3,  // 1: com.mixi.mercury.api.Post.created_at:type_name -> com.mixi.mercury.api.Timestamp
-	2,  // 2: com.mixi.mercury.api.Post.media:type_name -> com.mixi.mercury.api.MediaItem
-	4,  // 3: com.mixi.mercury.api.CreatePostResponse.post:type_name -> com.mixi.mercury.api.Post
-	4,  // 4: com.mixi.mercury.api.GetPostsResponse.post:type_name -> com.mixi.mercury.api.Post
-	12, // 5: com.mixi.mercury.api.GetPersonasResponse.persona:type_name -> com.mixi.mercury.api.Persona
-	3,  // 6: com.mixi.mercury.api.Persona.created_at:type_name -> com.mixi.mercury.api.Timestamp
-	2,  // 7: com.mixi.mercury.api.GetMediaResponse.media:type_name -> com.mixi.mercury.api.MediaItem
-	0,  // 8: com.mixi.mercury.api.MercuryService.CreatePost:input_type -> com.mixi.mercury.api.CreatePostRequest
-	6,  // 9: com.mixi.mercury.api.MercuryService.GetPosts:input_type -> com.mixi.mercury.api.GetPostsRequest
-	8,  // 10: com.mixi.mercury.api.MercuryService.SwitchPersona:input_type -> com.mixi.mercury.api.SwitchPersonaRequest
-	10, // 11: com.mixi.mercury.api.MercuryService.GetPersonas:input_type -> com.mixi.mercury.api.GetPersonasRequest
-	13, // 12: com.mixi.mercury.api.MercuryService.GetMedia:input_type -> com.mixi.mercury.api.GetMediaRequest
-	5,  // 13: com.mixi.mercury.api.MercuryService.CreatePost:output_type -> com.mixi.mercury.api.CreatePostResponse
-	7,  // 14: com.mixi.mercury.api.MercuryService.GetPosts:output_type -> com.mixi.mercury.api.GetPostsResponse
-	9,  // 15: com.mixi.mercury.api.MercuryService.SwitchPersona:output_type -> com.mixi.mercury.api.SwitchPersonaResponse
-	11, // 16: com.mixi.mercury.api.MercuryService.GetPersonas:output_type -> com.mixi.mercury.api.GetPersonasResponse
-	14, // 17: com.mixi.mercury.api.MercuryService.GetMedia:output_type -> com.mixi.mercury.api.GetMediaResponse
-	13, // [13:18] is the sub-list for method output_type
-	8,  // [8:13] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	2,  // 1: com.mixi.mercury.api.CommunityInfo.media:type_name -> com.mixi.mercury.api.MediaItem
+	5,  // 2: com.mixi.mercury.api.Stamp.stamp_info:type_name -> com.mixi.mercury.api.StampInfo
+	3,  // 3: com.mixi.mercury.api.Post.created_at:type_name -> com.mixi.mercury.api.Timestamp
+	2,  // 4: com.mixi.mercury.api.Post.media:type_name -> com.mixi.mercury.api.MediaItem
+	7,  // 5: com.mixi.mercury.api.Post.parent_post:type_name -> com.mixi.mercury.api.Post
+	4,  // 6: com.mixi.mercury.api.Post.community:type_name -> com.mixi.mercury.api.CommunityInfo
+	6,  // 7: com.mixi.mercury.api.Post.stamps:type_name -> com.mixi.mercury.api.Stamp
+	7,  // 8: com.mixi.mercury.api.CreatePostResponse.post:type_name -> com.mixi.mercury.api.Post
+	7,  // 9: com.mixi.mercury.api.GetPostsResponse.post:type_name -> com.mixi.mercury.api.Post
+	15, // 10: com.mixi.mercury.api.GetPersonasResponse.persona:type_name -> com.mixi.mercury.api.Persona
+	3,  // 11: com.mixi.mercury.api.Persona.created_at:type_name -> com.mixi.mercury.api.Timestamp
+	2,  // 12: com.mixi.mercury.api.GetMediaResponse.media:type_name -> com.mixi.mercury.api.MediaItem
+	20, // 13: com.mixi.mercury.api.GetSubscribingFeedsResponse.feeds:type_name -> com.mixi.mercury.api.Feed
+	7,  // 14: com.mixi.mercury.api.Feed.post:type_name -> com.mixi.mercury.api.Post
+	7,  // 15: com.mixi.mercury.api.GetRecommendedTimelineResponse.posts:type_name -> com.mixi.mercury.api.Post
+	0,  // 16: com.mixi.mercury.api.MercuryService.CreatePost:input_type -> com.mixi.mercury.api.CreatePostRequest
+	9,  // 17: com.mixi.mercury.api.MercuryService.GetPosts:input_type -> com.mixi.mercury.api.GetPostsRequest
+	11, // 18: com.mixi.mercury.api.MercuryService.SwitchPersona:input_type -> com.mixi.mercury.api.SwitchPersonaRequest
+	13, // 19: com.mixi.mercury.api.MercuryService.GetPersonas:input_type -> com.mixi.mercury.api.GetPersonasRequest
+	16, // 20: com.mixi.mercury.api.MercuryService.GetMedia:input_type -> com.mixi.mercury.api.GetMediaRequest
+	18, // 21: com.mixi.mercury.api.MercuryService.GetSubscribingFeeds:input_type -> com.mixi.mercury.api.GetSubscribingFeedsRequest
+	21, // 22: com.mixi.mercury.api.MercuryService.GetRecommendedTimeline:input_type -> com.mixi.mercury.api.GetRecommendedTimelineRequest
+	8,  // 23: com.mixi.mercury.api.MercuryService.CreatePost:output_type -> com.mixi.mercury.api.CreatePostResponse
+	10, // 24: com.mixi.mercury.api.MercuryService.GetPosts:output_type -> com.mixi.mercury.api.GetPostsResponse
+	12, // 25: com.mixi.mercury.api.MercuryService.SwitchPersona:output_type -> com.mixi.mercury.api.SwitchPersonaResponse
+	14, // 26: com.mixi.mercury.api.MercuryService.GetPersonas:output_type -> com.mixi.mercury.api.GetPersonasResponse
+	17, // 27: com.mixi.mercury.api.MercuryService.GetMedia:output_type -> com.mixi.mercury.api.GetMediaResponse
+	19, // 28: com.mixi.mercury.api.MercuryService.GetSubscribingFeeds:output_type -> com.mixi.mercury.api.GetSubscribingFeedsResponse
+	22, // 29: com.mixi.mercury.api.MercuryService.GetRecommendedTimeline:output_type -> com.mixi.mercury.api.GetRecommendedTimelineResponse
+	23, // [23:30] is the sub-list for method output_type
+	16, // [16:23] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_com_mixi_mercury_api_mixi2_proto_init() }
@@ -1016,13 +1584,16 @@ func file_com_mixi_mercury_api_mixi2_proto_init() {
 	}
 	file_com_mixi_mercury_api_mixi2_proto_msgTypes[0].OneofWrappers = []any{}
 	file_com_mixi_mercury_api_mixi2_proto_msgTypes[2].OneofWrappers = []any{}
+	file_com_mixi_mercury_api_mixi2_proto_msgTypes[7].OneofWrappers = []any{}
+	file_com_mixi_mercury_api_mixi2_proto_msgTypes[18].OneofWrappers = []any{}
+	file_com_mixi_mercury_api_mixi2_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_mixi_mercury_api_mixi2_proto_rawDesc), len(file_com_mixi_mercury_api_mixi2_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

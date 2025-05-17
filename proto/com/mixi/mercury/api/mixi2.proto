@@ -34,13 +34,38 @@ message Timestamp {
   int64 timestamp = 1;
 }
 
+message CommunityInfo {
+  string id = 1;
+  string title = 2;
+  MediaItem media = 6;
+  string unknown11 = 11;
+}
+
+message StampInfo {
+  string name = 1;
+  string stamp_url = 2;
+}
+
+message Stamp {
+  StampInfo stamp_info = 1;
+  int32 click = 2;
+}
+
 message Post {
-  string post_id = 1;
+  string id = 1;
   string timestamp_ns = 2;
   Timestamp created_at = 3;
   string unknown4_id = 4;
-  MediaItem media = 7;
+  optional MediaItem media = 7;
+  optional int32 unknown8 = 8;
+  optional int32 unknown9 = 9;
+  optional string unknown10 = 10;
   string text = 12;
+  optional string parent_post_id = 13;
+  optional Post parent_post = 19;
+  optional int32 unkonwn21 = 21;
+  optional CommunityInfo community = 25;
+  repeated Stamp stamps = 29;
 }
 
 message CreatePostResponse {
@@ -59,8 +84,7 @@ message SwitchPersonaRequest {
   string persona_id = 1;
 }
 
-message SwitchPersonaResponse {
-}
+message SwitchPersonaResponse {}
 
 message GetPersonasRequest {
   string persona_id = 1;
@@ -88,10 +112,37 @@ message GetMediaResponse {
   MediaItem media = 1;
 }
 
+message GetSubscribingFeedsRequest {
+  optional string next_timestamp_ns = 1;
+  int32 count = 2;
+}
+
+message GetSubscribingFeedsResponse {
+  repeated Feed feeds = 1;
+  string next_timestamp_ns = 2;
+}
+
+message Feed {
+  int32 unknown1 = 1;
+  string timestamp_ns = 2;
+  Post post = 3;
+}
+
+message GetRecommendedTimelineRequest {
+  optional string next_timestamp_ns = 1;
+  int32 count = 3;
+}
+
+message GetRecommendedTimelineResponse {
+  repeated Post posts = 1;
+}
+
 service MercuryService {
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
   rpc GetPosts(GetPostsRequest) returns (GetPostsResponse) {}
   rpc SwitchPersona(SwitchPersonaRequest) returns (SwitchPersonaResponse) {}
   rpc GetPersonas(GetPersonasRequest) returns (GetPersonasResponse) {}
   rpc GetMedia(GetMediaRequest) returns (GetMediaResponse) {}
+  rpc GetSubscribingFeeds(GetSubscribingFeedsRequest) returns (GetSubscribingFeedsResponse) {}
+  rpc GetRecommendedTimeline(GetRecommendedTimelineRequest) returns (GetRecommendedTimelineResponse) {}
 }

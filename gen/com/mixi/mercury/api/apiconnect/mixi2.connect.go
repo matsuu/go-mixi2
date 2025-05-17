@@ -46,6 +46,12 @@ const (
 	MercuryServiceGetPersonasProcedure = "/com.mixi.mercury.api.MercuryService/GetPersonas"
 	// MercuryServiceGetMediaProcedure is the fully-qualified name of the MercuryService's GetMedia RPC.
 	MercuryServiceGetMediaProcedure = "/com.mixi.mercury.api.MercuryService/GetMedia"
+	// MercuryServiceGetSubscribingFeedsProcedure is the fully-qualified name of the MercuryService's
+	// GetSubscribingFeeds RPC.
+	MercuryServiceGetSubscribingFeedsProcedure = "/com.mixi.mercury.api.MercuryService/GetSubscribingFeeds"
+	// MercuryServiceGetRecommendedTimelineProcedure is the fully-qualified name of the MercuryService's
+	// GetRecommendedTimeline RPC.
+	MercuryServiceGetRecommendedTimelineProcedure = "/com.mixi.mercury.api.MercuryService/GetRecommendedTimeline"
 )
 
 // MercuryServiceClient is a client for the com.mixi.mercury.api.MercuryService service.
@@ -55,6 +61,8 @@ type MercuryServiceClient interface {
 	SwitchPersona(context.Context, *connect.Request[api.SwitchPersonaRequest]) (*connect.Response[api.SwitchPersonaResponse], error)
 	GetPersonas(context.Context, *connect.Request[api.GetPersonasRequest]) (*connect.Response[api.GetPersonasResponse], error)
 	GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error)
+	GetSubscribingFeeds(context.Context, *connect.Request[api.GetSubscribingFeedsRequest]) (*connect.Response[api.GetSubscribingFeedsResponse], error)
+	GetRecommendedTimeline(context.Context, *connect.Request[api.GetRecommendedTimelineRequest]) (*connect.Response[api.GetRecommendedTimelineResponse], error)
 }
 
 // NewMercuryServiceClient constructs a client for the com.mixi.mercury.api.MercuryService service.
@@ -98,16 +106,30 @@ func NewMercuryServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(mercuryServiceMethods.ByName("GetMedia")),
 			connect.WithClientOptions(opts...),
 		),
+		getSubscribingFeeds: connect.NewClient[api.GetSubscribingFeedsRequest, api.GetSubscribingFeedsResponse](
+			httpClient,
+			baseURL+MercuryServiceGetSubscribingFeedsProcedure,
+			connect.WithSchema(mercuryServiceMethods.ByName("GetSubscribingFeeds")),
+			connect.WithClientOptions(opts...),
+		),
+		getRecommendedTimeline: connect.NewClient[api.GetRecommendedTimelineRequest, api.GetRecommendedTimelineResponse](
+			httpClient,
+			baseURL+MercuryServiceGetRecommendedTimelineProcedure,
+			connect.WithSchema(mercuryServiceMethods.ByName("GetRecommendedTimeline")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // mercuryServiceClient implements MercuryServiceClient.
 type mercuryServiceClient struct {
-	createPost    *connect.Client[api.CreatePostRequest, api.CreatePostResponse]
-	getPosts      *connect.Client[api.GetPostsRequest, api.GetPostsResponse]
-	switchPersona *connect.Client[api.SwitchPersonaRequest, api.SwitchPersonaResponse]
-	getPersonas   *connect.Client[api.GetPersonasRequest, api.GetPersonasResponse]
-	getMedia      *connect.Client[api.GetMediaRequest, api.GetMediaResponse]
+	createPost             *connect.Client[api.CreatePostRequest, api.CreatePostResponse]
+	getPosts               *connect.Client[api.GetPostsRequest, api.GetPostsResponse]
+	switchPersona          *connect.Client[api.SwitchPersonaRequest, api.SwitchPersonaResponse]
+	getPersonas            *connect.Client[api.GetPersonasRequest, api.GetPersonasResponse]
+	getMedia               *connect.Client[api.GetMediaRequest, api.GetMediaResponse]
+	getSubscribingFeeds    *connect.Client[api.GetSubscribingFeedsRequest, api.GetSubscribingFeedsResponse]
+	getRecommendedTimeline *connect.Client[api.GetRecommendedTimelineRequest, api.GetRecommendedTimelineResponse]
 }
 
 // CreatePost calls com.mixi.mercury.api.MercuryService.CreatePost.
@@ -135,6 +157,16 @@ func (c *mercuryServiceClient) GetMedia(ctx context.Context, req *connect.Reques
 	return c.getMedia.CallUnary(ctx, req)
 }
 
+// GetSubscribingFeeds calls com.mixi.mercury.api.MercuryService.GetSubscribingFeeds.
+func (c *mercuryServiceClient) GetSubscribingFeeds(ctx context.Context, req *connect.Request[api.GetSubscribingFeedsRequest]) (*connect.Response[api.GetSubscribingFeedsResponse], error) {
+	return c.getSubscribingFeeds.CallUnary(ctx, req)
+}
+
+// GetRecommendedTimeline calls com.mixi.mercury.api.MercuryService.GetRecommendedTimeline.
+func (c *mercuryServiceClient) GetRecommendedTimeline(ctx context.Context, req *connect.Request[api.GetRecommendedTimelineRequest]) (*connect.Response[api.GetRecommendedTimelineResponse], error) {
+	return c.getRecommendedTimeline.CallUnary(ctx, req)
+}
+
 // MercuryServiceHandler is an implementation of the com.mixi.mercury.api.MercuryService service.
 type MercuryServiceHandler interface {
 	CreatePost(context.Context, *connect.Request[api.CreatePostRequest]) (*connect.Response[api.CreatePostResponse], error)
@@ -142,6 +174,8 @@ type MercuryServiceHandler interface {
 	SwitchPersona(context.Context, *connect.Request[api.SwitchPersonaRequest]) (*connect.Response[api.SwitchPersonaResponse], error)
 	GetPersonas(context.Context, *connect.Request[api.GetPersonasRequest]) (*connect.Response[api.GetPersonasResponse], error)
 	GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error)
+	GetSubscribingFeeds(context.Context, *connect.Request[api.GetSubscribingFeedsRequest]) (*connect.Response[api.GetSubscribingFeedsResponse], error)
+	GetRecommendedTimeline(context.Context, *connect.Request[api.GetRecommendedTimelineRequest]) (*connect.Response[api.GetRecommendedTimelineResponse], error)
 }
 
 // NewMercuryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -181,6 +215,18 @@ func NewMercuryServiceHandler(svc MercuryServiceHandler, opts ...connect.Handler
 		connect.WithSchema(mercuryServiceMethods.ByName("GetMedia")),
 		connect.WithHandlerOptions(opts...),
 	)
+	mercuryServiceGetSubscribingFeedsHandler := connect.NewUnaryHandler(
+		MercuryServiceGetSubscribingFeedsProcedure,
+		svc.GetSubscribingFeeds,
+		connect.WithSchema(mercuryServiceMethods.ByName("GetSubscribingFeeds")),
+		connect.WithHandlerOptions(opts...),
+	)
+	mercuryServiceGetRecommendedTimelineHandler := connect.NewUnaryHandler(
+		MercuryServiceGetRecommendedTimelineProcedure,
+		svc.GetRecommendedTimeline,
+		connect.WithSchema(mercuryServiceMethods.ByName("GetRecommendedTimeline")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/com.mixi.mercury.api.MercuryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MercuryServiceCreatePostProcedure:
@@ -193,6 +239,10 @@ func NewMercuryServiceHandler(svc MercuryServiceHandler, opts ...connect.Handler
 			mercuryServiceGetPersonasHandler.ServeHTTP(w, r)
 		case MercuryServiceGetMediaProcedure:
 			mercuryServiceGetMediaHandler.ServeHTTP(w, r)
+		case MercuryServiceGetSubscribingFeedsProcedure:
+			mercuryServiceGetSubscribingFeedsHandler.ServeHTTP(w, r)
+		case MercuryServiceGetRecommendedTimelineProcedure:
+			mercuryServiceGetRecommendedTimelineHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -220,4 +270,12 @@ func (UnimplementedMercuryServiceHandler) GetPersonas(context.Context, *connect.
 
 func (UnimplementedMercuryServiceHandler) GetMedia(context.Context, *connect.Request[api.GetMediaRequest]) (*connect.Response[api.GetMediaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("com.mixi.mercury.api.MercuryService.GetMedia is not implemented"))
+}
+
+func (UnimplementedMercuryServiceHandler) GetSubscribingFeeds(context.Context, *connect.Request[api.GetSubscribingFeedsRequest]) (*connect.Response[api.GetSubscribingFeedsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("com.mixi.mercury.api.MercuryService.GetSubscribingFeeds is not implemented"))
+}
+
+func (UnimplementedMercuryServiceHandler) GetRecommendedTimeline(context.Context, *connect.Request[api.GetRecommendedTimelineRequest]) (*connect.Response[api.GetRecommendedTimelineResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("com.mixi.mercury.api.MercuryService.GetRecommendedTimeline is not implemented"))
 }

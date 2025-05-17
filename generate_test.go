@@ -2,10 +2,12 @@ package mixi2
 
 import (
 	"encoding/base64"
+	"os"
 	"testing"
 
+	"connectrpc.com/connect"
 	"github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api"
-
+	"github.com/matsuu/go-mixi2/gen/com/mixi/mercury/api/apiconnect"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -22,5 +24,55 @@ func TestUnmarshal(t *testing.T) {
 	if err := proto.Unmarshal(raw, postResponse); err != nil {
 		t.Fatal("Failed to read response", err)
 	}
-	println(postResponse.String())
+	t.Log(postResponse.String())
+}
+
+func getClient(t *testing.T) apiconnect.MercuryServiceClient {
+	authKey := os.Getenv("MIXI2_AUTH_KEY")
+	authToken := os.Getenv("MIXI2_AUTH_TOKEN")
+	userAgent := os.Getenv("MIXI2_USER_AGENT")
+	if authKey == "" || authToken == "" || userAgent == "" {
+		t.Skip("Skipping test because MIXI2_* environment variable is missing")
+	}
+	return NewClient(WithAuth(authKey, authToken, userAgent))
+}
+
+func TestGetSubscribingFeeds(t *testing.T) {
+	ctx := t.Context()
+
+	count := 30
+
+	client := getClient(t)
+	resp, err := client.GetSubscribingFeeds(ctx, connect.NewRequest(
+		&api.GetSubscribingFeedsRequest{
+			Count: int32(count),
+		},
+	))
+	if err != nil {
+		t.Fatalf("failed to GetSubscribingFeeds: %v", err)
+	}
+	got := len(resp.Msg.Feeds)
+	if got != count {
+		t.Fatalf("expected: %v, got: %v", count, got)
+	}
+}
+
+func TestGetRecommendedTimeline(t *testing.T) {
+	ctx := t.Context()
+
+	count := 30
+
+	client := getClient(t)
+	resp, err := client.GetRecommendedTimeline(ctx, connect.NewRequest(
+		&api.GetRecommendedTimelineRequest{
+			Count: int32(count),
+		},
+	))
+	if err != nil {
+		t.Fatalf("failed to GetSubscribingFeeds: %v", err)
+	}
+	got := len(resp.Msg.Posts)
+	if got != count {
+		t.Fatalf("expected: %v, got: %v", count, got)
+	}
 }
