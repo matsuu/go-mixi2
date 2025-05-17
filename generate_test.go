@@ -45,7 +45,7 @@ func TestGetSubscribingFeeds(t *testing.T) {
 	client := getClient(t)
 	resp, err := client.GetSubscribingFeeds(ctx, connect.NewRequest(
 		&api.GetSubscribingFeedsRequest{
-			Count: uint32(count),
+			Count: int32(count),
 		},
 	))
 	if err != nil {
@@ -65,7 +65,7 @@ func TestGetRecommendedTimeline(t *testing.T) {
 	client := getClient(t)
 	resp, err := client.GetRecommendedTimeline(ctx, connect.NewRequest(
 		&api.GetRecommendedTimelineRequest{
-			Count: uint32(count),
+			Count: int32(count),
 		},
 	))
 	if err != nil {

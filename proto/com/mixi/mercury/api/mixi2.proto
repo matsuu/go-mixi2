@@ -14,24 +14,24 @@ message CreatePostRequest {
 message ImageInfo {
   string large_url = 1;
   string large_mime_type = 2;
-  uint32 large_height = 3;
-  uint32 large_width = 4;
+  int32 large_height = 3;
+  int32 large_width = 4;
   string small_url = 5;
   string small_mime_type = 6;
-  uint32 small_height = 7;
-  uint32 small_width = 8;
+  int32 small_height = 7;
+  int32 small_width = 8;
   string blur_hash = 9;
 }
 
 message MediaItem {
   string media_id = 1;
-  uint32 unknown3 = 3;
-  uint32 unknown4 = 4; // 1->2->3 (ok?)
+  int32 unknown3 = 3;
+  int32 unknown4 = 4; // 1->2->3 (ok?)
   optional ImageInfo image = 6;
 }
 
 message Timestamp {
-  uint64 timestamp = 1;
+  int64 timestamp = 1;
 }
 
 message CommunityInfo {
@@ -48,7 +48,7 @@ message StampInfo {
 
 message Stamp {
   StampInfo stamp_info = 1;
-  uint32 click = 2;
+  int32 click = 2;
 }
 
 message Post {
@@ -57,13 +57,13 @@ message Post {
   Timestamp created_at = 3;
   string unknown4_id = 4;
   optional MediaItem media = 7;
-  optional uint32 unknown8 = 8;
-  optional uint32 unknown9 = 9;
+  optional int32 unknown8 = 8;
+  optional int32 unknown9 = 9;
   optional string unknown10 = 10;
   string text = 12;
   optional string parent_post_id = 13;
   optional Post parent_post = 19;
-  optional uint32 unkonwn21 = 21;
+  optional int32 unkonwn21 = 21;
   optional CommunityInfo community = 25;
   repeated Stamp stamps = 29;
 }
@@ -84,8 +84,7 @@ message SwitchPersonaRequest {
   string persona_id = 1;
 }
 
-message SwitchPersonaResponse {
-}
+message SwitchPersonaResponse {}
 
 message GetPersonasRequest {
   string persona_id = 1;
@@ -115,8 +114,7 @@ message GetMediaResponse {
 
 message GetSubscribingFeedsRequest {
   optional string next_timestamp_ns = 1;
-  uint32 count = 2;
-
+  int32 count = 2;
 }
 
 message GetSubscribingFeedsResponse {
@@ -125,14 +123,14 @@ message GetSubscribingFeedsResponse {
 }
 
 message Feed {
-  uint32 unknown1 = 1;
+  int32 unknown1 = 1;
   string timestamp_ns = 2;
   Post post = 3;
 }
 
 message GetRecommendedTimelineRequest {
   optional string next_timestamp_ns = 1;
-  uint32 count = 3;
+  int32 count = 3;
 }
 
 message GetRecommendedTimelineResponse {

@@ -93,12 +93,12 @@ type ImageInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	LargeUrl      string                 `protobuf:"bytes,1,opt,name=large_url,json=largeUrl,proto3" json:"large_url,omitempty"`
 	LargeMimeType string                 `protobuf:"bytes,2,opt,name=large_mime_type,json=largeMimeType,proto3" json:"large_mime_type,omitempty"`
-	LargeHeight   uint32                 `protobuf:"varint,3,opt,name=large_height,json=largeHeight,proto3" json:"large_height,omitempty"`
-	LargeWidth    uint32                 `protobuf:"varint,4,opt,name=large_width,json=largeWidth,proto3" json:"large_width,omitempty"`
+	LargeHeight   int32                  `protobuf:"varint,3,opt,name=large_height,json=largeHeight,proto3" json:"large_height,omitempty"`
+	LargeWidth    int32                  `protobuf:"varint,4,opt,name=large_width,json=largeWidth,proto3" json:"large_width,omitempty"`
 	SmallUrl      string                 `protobuf:"bytes,5,opt,name=small_url,json=smallUrl,proto3" json:"small_url,omitempty"`
 	SmallMimeType string                 `protobuf:"bytes,6,opt,name=small_mime_type,json=smallMimeType,proto3" json:"small_mime_type,omitempty"`
-	SmallHeight   uint32                 `protobuf:"varint,7,opt,name=small_height,json=smallHeight,proto3" json:"small_height,omitempty"`
-	SmallWidth    uint32                 `protobuf:"varint,8,opt,name=small_width,json=smallWidth,proto3" json:"small_width,omitempty"`
+	SmallHeight   int32                  `protobuf:"varint,7,opt,name=small_height,json=smallHeight,proto3" json:"small_height,omitempty"`
+	SmallWidth    int32                  `protobuf:"varint,8,opt,name=small_width,json=smallWidth,proto3" json:"small_width,omitempty"`
 	BlurHash      string                 `protobuf:"bytes,9,opt,name=blur_hash,json=blurHash,proto3" json:"blur_hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -148,14 +148,14 @@ func (x *ImageInfo) GetLargeMimeType() string {
 	return ""
 }
 
-func (x *ImageInfo) GetLargeHeight() uint32 {
+func (x *ImageInfo) GetLargeHeight() int32 {
 	if x != nil {
 		return x.LargeHeight
 	}
 	return 0
 }
 
-func (x *ImageInfo) GetLargeWidth() uint32 {
+func (x *ImageInfo) GetLargeWidth() int32 {
 	if x != nil {
 		return x.LargeWidth
 	}
@@ -176,14 +176,14 @@ func (x *ImageInfo) GetSmallMimeType() string {
 	return ""
 }
 
-func (x *ImageInfo) GetSmallHeight() uint32 {
+func (x *ImageInfo) GetSmallHeight() int32 {
 	if x != nil {
 		return x.SmallHeight
 	}
 	return 0
 }
 
-func (x *ImageInfo) GetSmallWidth() uint32 {
+func (x *ImageInfo) GetSmallWidth() int32 {
 	if x != nil {
 		return x.SmallWidth
 	}
@@ -200,8 +200,8 @@ func (x *ImageInfo) GetBlurHash() string {
 type MediaItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MediaId       string                 `protobuf:"bytes,1,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
-	Unknown3      uint32                 `protobuf:"varint,3,opt,name=unknown3,proto3" json:"unknown3,omitempty"`
-	Unknown4      uint32                 `protobuf:"varint,4,opt,name=unknown4,proto3" json:"unknown4,omitempty"` // 1->2->3 (ok?)
+	Unknown3      int32                  `protobuf:"varint,3,opt,name=unknown3,proto3" json:"unknown3,omitempty"`
+	Unknown4      int32                  `protobuf:"varint,4,opt,name=unknown4,proto3" json:"unknown4,omitempty"` // 1->2->3 (ok?)
 	Image         *ImageInfo             `protobuf:"bytes,6,opt,name=image,proto3,oneof" json:"image,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -244,14 +244,14 @@ func (x *MediaItem) GetMediaId() string {
 	return ""
 }
 
-func (x *MediaItem) GetUnknown3() uint32 {
+func (x *MediaItem) GetUnknown3() int32 {
 	if x != nil {
 		return x.Unknown3
 	}
 	return 0
 }
 
-func (x *MediaItem) GetUnknown4() uint32 {
+func (x *MediaItem) GetUnknown4() int32 {
 	if x != nil {
 		return x.Unknown4
 	}
@@ -267,7 +267,7 @@ func (x *MediaItem) GetImage() *ImageInfo {
 
 type Timestamp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     uint64                 `protobuf:"varint,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Timestamp     int64                  `protobuf:"varint,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -302,7 +302,7 @@ func (*Timestamp) Descriptor() ([]byte, []int) {
 	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *Timestamp) GetTimestamp() uint64 {
+func (x *Timestamp) GetTimestamp() int64 {
 	if x != nil {
 		return x.Timestamp
 	}
@@ -432,7 +432,7 @@ func (x *StampInfo) GetStampUrl() string {
 type Stamp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	StampInfo     *StampInfo             `protobuf:"bytes,1,opt,name=stamp_info,json=stampInfo,proto3" json:"stamp_info,omitempty"`
-	Click         uint32                 `protobuf:"varint,2,opt,name=click,proto3" json:"click,omitempty"`
+	Click         int32                  `protobuf:"varint,2,opt,name=click,proto3" json:"click,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -474,7 +474,7 @@ func (x *Stamp) GetStampInfo() *StampInfo {
 	return nil
 }
 
-func (x *Stamp) GetClick() uint32 {
+func (x *Stamp) GetClick() int32 {
 	if x != nil {
 		return x.Click
 	}
@@ -488,13 +488,13 @@ type Post struct {
 	CreatedAt     *Timestamp             `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Unknown4Id    string                 `protobuf:"bytes,4,opt,name=unknown4_id,json=unknown4Id,proto3" json:"unknown4_id,omitempty"`
 	Media         *MediaItem             `protobuf:"bytes,7,opt,name=media,proto3,oneof" json:"media,omitempty"`
-	Unknown8      *uint32                `protobuf:"varint,8,opt,name=unknown8,proto3,oneof" json:"unknown8,omitempty"`
-	Unknown9      *uint32                `protobuf:"varint,9,opt,name=unknown9,proto3,oneof" json:"unknown9,omitempty"`
+	Unknown8      *int32                 `protobuf:"varint,8,opt,name=unknown8,proto3,oneof" json:"unknown8,omitempty"`
+	Unknown9      *int32                 `protobuf:"varint,9,opt,name=unknown9,proto3,oneof" json:"unknown9,omitempty"`
 	Unknown10     *string                `protobuf:"bytes,10,opt,name=unknown10,proto3,oneof" json:"unknown10,omitempty"`
 	Text          string                 `protobuf:"bytes,12,opt,name=text,proto3" json:"text,omitempty"`
 	ParentPostId  *string                `protobuf:"bytes,13,opt,name=parent_post_id,json=parentPostId,proto3,oneof" json:"parent_post_id,omitempty"`
 	ParentPost    *Post                  `protobuf:"bytes,19,opt,name=parent_post,json=parentPost,proto3,oneof" json:"parent_post,omitempty"`
-	Unkonwn21     *uint32                `protobuf:"varint,21,opt,name=unkonwn21,proto3,oneof" json:"unkonwn21,omitempty"`
+	Unkonwn21     *int32                 `protobuf:"varint,21,opt,name=unkonwn21,proto3,oneof" json:"unkonwn21,omitempty"`
 	Community     *CommunityInfo         `protobuf:"bytes,25,opt,name=community,proto3,oneof" json:"community,omitempty"`
 	Stamps        []*Stamp               `protobuf:"bytes,29,rep,name=stamps,proto3" json:"stamps,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -566,14 +566,14 @@ func (x *Post) GetMedia() *MediaItem {
 	return nil
 }
 
-func (x *Post) GetUnknown8() uint32 {
+func (x *Post) GetUnknown8() int32 {
 	if x != nil && x.Unknown8 != nil {
 		return *x.Unknown8
 	}
 	return 0
 }
 
-func (x *Post) GetUnknown9() uint32 {
+func (x *Post) GetUnknown9() int32 {
 	if x != nil && x.Unknown9 != nil {
 		return *x.Unknown9
 	}
@@ -608,7 +608,7 @@ func (x *Post) GetParentPost() *Post {
 	return nil
 }
 
-func (x *Post) GetUnkonwn21() uint32 {
+func (x *Post) GetUnkonwn21() int32 {
 	if x != nil && x.Unkonwn21 != nil {
 		return *x.Unkonwn21
 	}
@@ -1112,7 +1112,7 @@ func (x *GetMediaResponse) GetMedia() *MediaItem {
 type GetSubscribingFeedsRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	NextTimestampNs *string                `protobuf:"bytes,1,opt,name=next_timestamp_ns,json=nextTimestampNs,proto3,oneof" json:"next_timestamp_ns,omitempty"`
-	Count           uint32                 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Count           int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1154,7 +1154,7 @@ func (x *GetSubscribingFeedsRequest) GetNextTimestampNs() string {
 	return ""
 }
 
-func (x *GetSubscribingFeedsRequest) GetCount() uint32 {
+func (x *GetSubscribingFeedsRequest) GetCount() int32 {
 	if x != nil {
 		return x.Count
 	}
@@ -1215,7 +1215,7 @@ func (x *GetSubscribingFeedsResponse) GetNextTimestampNs() string {
 
 type Feed struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Unknown1      uint32                 `protobuf:"varint,1,opt,name=unknown1,proto3" json:"unknown1,omitempty"`
+	Unknown1      int32                  `protobuf:"varint,1,opt,name=unknown1,proto3" json:"unknown1,omitempty"`
 	TimestampNs   string                 `protobuf:"bytes,2,opt,name=timestamp_ns,json=timestampNs,proto3" json:"timestamp_ns,omitempty"`
 	Post          *Post                  `protobuf:"bytes,3,opt,name=post,proto3" json:"post,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1252,7 +1252,7 @@ func (*Feed) Descriptor() ([]byte, []int) {
 	return file_com_mixi_mercury_api_mixi2_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *Feed) GetUnknown1() uint32 {
+func (x *Feed) GetUnknown1() int32 {
 	if x != nil {
 		return x.Unknown1
 	}
@@ -1276,7 +1276,7 @@ func (x *Feed) GetPost() *Post {
 type GetRecommendedTimelineRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	NextTimestampNs *string                `protobuf:"bytes,1,opt,name=next_timestamp_ns,json=nextTimestampNs,proto3,oneof" json:"next_timestamp_ns,omitempty"`
-	Count           uint32                 `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
+	Count           int32                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1318,7 +1318,7 @@ func (x *GetRecommendedTimelineRequest) GetNextTimestampNs() string {
 	return ""
 }
 
-func (x *GetRecommendedTimelineRequest) GetCount() uint32 {
+func (x *GetRecommendedTimelineRequest) GetCount() int32 {
 	if x != nil {
 		return x.Count
 	}
@@ -1385,23 +1385,23 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\tImageInfo\x12\x1b\n" +
 	"\tlarge_url\x18\x01 \x01(\tR\blargeUrl\x12&\n" +
 	"\x0flarge_mime_type\x18\x02 \x01(\tR\rlargeMimeType\x12!\n" +
-	"\flarge_height\x18\x03 \x01(\rR\vlargeHeight\x12\x1f\n" +
-	"\vlarge_width\x18\x04 \x01(\rR\n" +
+	"\flarge_height\x18\x03 \x01(\x05R\vlargeHeight\x12\x1f\n" +
+	"\vlarge_width\x18\x04 \x01(\x05R\n" +
 	"largeWidth\x12\x1b\n" +
 	"\tsmall_url\x18\x05 \x01(\tR\bsmallUrl\x12&\n" +
 	"\x0fsmall_mime_type\x18\x06 \x01(\tR\rsmallMimeType\x12!\n" +
-	"\fsmall_height\x18\a \x01(\rR\vsmallHeight\x12\x1f\n" +
-	"\vsmall_width\x18\b \x01(\rR\n" +
+	"\fsmall_height\x18\a \x01(\x05R\vsmallHeight\x12\x1f\n" +
+	"\vsmall_width\x18\b \x01(\x05R\n" +
 	"smallWidth\x12\x1b\n" +
 	"\tblur_hash\x18\t \x01(\tR\bblurHash\"\xa4\x01\n" +
 	"\tMediaItem\x12\x19\n" +
 	"\bmedia_id\x18\x01 \x01(\tR\amediaId\x12\x1a\n" +
-	"\bunknown3\x18\x03 \x01(\rR\bunknown3\x12\x1a\n" +
-	"\bunknown4\x18\x04 \x01(\rR\bunknown4\x12:\n" +
+	"\bunknown3\x18\x03 \x01(\x05R\bunknown3\x12\x1a\n" +
+	"\bunknown4\x18\x04 \x01(\x05R\bunknown4\x12:\n" +
 	"\x05image\x18\x06 \x01(\v2\x1f.com.mixi.mercury.api.ImageInfoH\x00R\x05image\x88\x01\x01B\b\n" +
 	"\x06_image\")\n" +
 	"\tTimestamp\x12\x1c\n" +
-	"\ttimestamp\x18\x01 \x01(\x04R\ttimestamp\"\x8a\x01\n" +
+	"\ttimestamp\x18\x01 \x01(\x03R\ttimestamp\"\x8a\x01\n" +
 	"\rCommunityInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x125\n" +
@@ -1413,7 +1413,7 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\x05Stamp\x12>\n" +
 	"\n" +
 	"stamp_info\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.StampInfoR\tstampInfo\x12\x14\n" +
-	"\x05click\x18\x02 \x01(\rR\x05click\"\xcd\x05\n" +
+	"\x05click\x18\x02 \x01(\x05R\x05click\"\xcd\x05\n" +
 	"\x04Post\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\ftimestamp_ns\x18\x02 \x01(\tR\vtimestampNs\x12>\n" +
@@ -1422,15 +1422,15 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\vunknown4_id\x18\x04 \x01(\tR\n" +
 	"unknown4Id\x12:\n" +
 	"\x05media\x18\a \x01(\v2\x1f.com.mixi.mercury.api.MediaItemH\x00R\x05media\x88\x01\x01\x12\x1f\n" +
-	"\bunknown8\x18\b \x01(\rH\x01R\bunknown8\x88\x01\x01\x12\x1f\n" +
-	"\bunknown9\x18\t \x01(\rH\x02R\bunknown9\x88\x01\x01\x12!\n" +
+	"\bunknown8\x18\b \x01(\x05H\x01R\bunknown8\x88\x01\x01\x12\x1f\n" +
+	"\bunknown9\x18\t \x01(\x05H\x02R\bunknown9\x88\x01\x01\x12!\n" +
 	"\tunknown10\x18\n" +
 	" \x01(\tH\x03R\tunknown10\x88\x01\x01\x12\x12\n" +
 	"\x04text\x18\f \x01(\tR\x04text\x12)\n" +
 	"\x0eparent_post_id\x18\r \x01(\tH\x04R\fparentPostId\x88\x01\x01\x12@\n" +
 	"\vparent_post\x18\x13 \x01(\v2\x1a.com.mixi.mercury.api.PostH\x05R\n" +
 	"parentPost\x88\x01\x01\x12!\n" +
-	"\tunkonwn21\x18\x15 \x01(\rH\x06R\tunkonwn21\x88\x01\x01\x12F\n" +
+	"\tunkonwn21\x18\x15 \x01(\x05H\x06R\tunkonwn21\x88\x01\x01\x12F\n" +
 	"\tcommunity\x18\x19 \x01(\v2#.com.mixi.mercury.api.CommunityInfoH\aR\tcommunity\x88\x01\x01\x123\n" +
 	"\x06stamps\x18\x1d \x03(\v2\x1b.com.mixi.mercury.api.StampR\x06stampsB\b\n" +
 	"\x06_mediaB\v\n" +
@@ -1476,18 +1476,18 @@ const file_com_mixi_mercury_api_mixi2_proto_rawDesc = "" +
 	"\x05media\x18\x01 \x01(\v2\x1f.com.mixi.mercury.api.MediaItemR\x05media\"y\n" +
 	"\x1aGetSubscribingFeedsRequest\x12/\n" +
 	"\x11next_timestamp_ns\x18\x01 \x01(\tH\x00R\x0fnextTimestampNs\x88\x01\x01\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\rR\x05countB\x14\n" +
+	"\x05count\x18\x02 \x01(\x05R\x05countB\x14\n" +
 	"\x12_next_timestamp_ns\"{\n" +
 	"\x1bGetSubscribingFeedsResponse\x120\n" +
 	"\x05feeds\x18\x01 \x03(\v2\x1a.com.mixi.mercury.api.FeedR\x05feeds\x12*\n" +
 	"\x11next_timestamp_ns\x18\x02 \x01(\tR\x0fnextTimestampNs\"u\n" +
 	"\x04Feed\x12\x1a\n" +
-	"\bunknown1\x18\x01 \x01(\rR\bunknown1\x12!\n" +
+	"\bunknown1\x18\x01 \x01(\x05R\bunknown1\x12!\n" +
 	"\ftimestamp_ns\x18\x02 \x01(\tR\vtimestampNs\x12.\n" +
 	"\x04post\x18\x03 \x01(\v2\x1a.com.mixi.mercury.api.PostR\x04post\"|\n" +
 	"\x1dGetRecommendedTimelineRequest\x12/\n" +
 	"\x11next_timestamp_ns\x18\x01 \x01(\tH\x00R\x0fnextTimestampNs\x88\x01\x01\x12\x14\n" +
-	"\x05count\x18\x03 \x01(\rR\x05countB\x14\n" +
+	"\x05count\x18\x03 \x01(\x05R\x05countB\x14\n" +
 	"\x12_next_timestamp_ns\"R\n" +
 	"\x1eGetRecommendedTimelineResponse\x120\n" +
 	"\x05posts\x18\x01 \x03(\v2\x1a.com.mixi.mercury.api.PostR\x05posts2\x85\x06\n" +
